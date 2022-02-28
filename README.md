@@ -13,3 +13,5 @@ html模板文件
 Flask视图，进行路由处理
 ### sql_script
 sql脚本处理
+### config
+配置文件
