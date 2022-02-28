@@ -2,7 +2,7 @@
 ## 二手房Web项目
 - 利用Flask框架进行开发
 - 启动`python manage.py`  
-- [二手房爬虫项目](https://github.com/XuSheng11/second_house_crawler)
+- 需配合[二手房爬虫项目](https://github.com/XuSheng11/second_house_crawler)
 ### models
 利用pony orm进行数据库实体管理
 ### static
