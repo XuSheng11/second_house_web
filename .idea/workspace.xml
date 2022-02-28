@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="579979fa-13da-4d4b-b34b-5c24242bd232" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="579979fa-13da-4d4b-b34b-5c24242bd232" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../second_house_crawler" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -196,11 +211,23 @@
       <workItem from="1646022020529" duration="14800000" />
       <workItem from="1646042011545" duration="1752000" />
       <workItem from="1646043773813" duration="703000" />
+      <workItem from="1646046686394" duration="300000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -208,10 +235,14 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="502" y="115" key="FileChooserDialogImpl" timestamp="1645269297313">
+    <state x="399" y="161" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1646046873708">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="502" y="115" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1645269297313" />
+    <state x="399" y="161" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.720@0.0.1280.720" timestamp="1646046873708" />
+    <state x="502" y="115" key="FileChooserDialogImpl" timestamp="1646046727972">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="502" y="115" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1646046727972" />
     <state width="1237" height="302" key="GridCell.Tab.0.bottom" timestamp="1646043764205">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
