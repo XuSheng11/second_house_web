@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    {{ if  }}
+    <title>{{ title }}</title>
+</head>
+<body>
+<h1>{{ title }}</h1>
+<br>
+<a href="{{ url_for('community_info',community_id=community_id) }}">{{ community }}</a>
+<br>
+<ul>
+    {% for key,value in features.items() %}
+        <li>
+            {{ key }} : {{ value }}
+        </li>
+    {% endfor %}
+</ul>
+<br>
+<ul>
+    {% for key,value in trade.items() %}
+        <li>
+            {{ key }} : {{ value }}
+        </li>
+    {% endfor %}
+</ul>
+<br>
+<ul>
+    {% for key,value in pictures.items() %}
+        <li>
+            <img src="{{ value }}"> <br>
+            <p> {{ key }} </p>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

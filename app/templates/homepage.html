@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>广州二手房</title>
+    <link href="../static/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="header"></div>
+<div class="filter"></div>
+<div class="content">
+    <ul class="HouseList">
+    {% for house in house_list %}
+        <li>
+            <div class="info">
+                <div class="title">
+                    <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
+                </div>
+                <div class="address">
+                    <a href="{{ url_for('community_info',community_id=house['community_id']) }}">{{ house['community'] }}</a>
+                </div>
+
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
