@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="579979fa-13da-4d4b-b34b-5c24242bd232" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -33,6 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -40,7 +45,7 @@
       <recent name="G:\学习\毕设\second_house_web\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test (1)">
+  <component name="RunManager" selected="Python.manage">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="second_house_web" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,33 +194,44 @@
       <workItem from="1644921767893" duration="4684000" />
       <workItem from="1645269252724" duration="646000" />
       <workItem from="1646022020529" duration="14800000" />
+      <workItem from="1646042011545" duration="1752000" />
+      <workItem from="1646043773813" duration="703000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/second_house_web" />
+    </ignored-roots>
+  </component>
   <component name="WindowStateProjectService">
     <state x="502" y="115" key="FileChooserDialogImpl" timestamp="1645269297313">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="502" y="115" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1645269297313" />
-    <state width="1237" height="341" key="GridCell.Tab.0.bottom" timestamp="1646041985034">
+    <state width="1237" height="302" key="GridCell.Tab.0.bottom" timestamp="1646043764205">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="341" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1646041985034" />
-    <state width="1237" height="341" key="GridCell.Tab.0.center" timestamp="1646041985034">
+    <state width="1237" height="302" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1646043764205" />
+    <state width="1237" height="302" key="GridCell.Tab.0.center" timestamp="1646043764205">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="341" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1646041985034" />
-    <state width="1237" height="341" key="GridCell.Tab.0.left" timestamp="1646041985034">
+    <state width="1237" height="302" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1646043764205" />
+    <state width="1237" height="302" key="GridCell.Tab.0.left" timestamp="1646043764205">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="341" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1646041985034" />
-    <state width="1237" height="341" key="GridCell.Tab.0.right" timestamp="1646041985034">
+    <state width="1237" height="302" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1646043764205" />
+    <state width="1237" height="302" key="GridCell.Tab.0.right" timestamp="1646043764205">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="341" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1646041985034" />
+    <state width="1237" height="302" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1646043764205" />
+    <state x="142" y="5" key="SettingsEditor" timestamp="1646043794458">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="142" y="5" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1646043794458" />
     <state x="93" y="93" width="1095" height="535" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1646029803495">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -235,6 +251,6 @@
     <SUITE FILE_PATH="coverage/second_house_web$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1646029220707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/second_house_backgroubnd$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1643889727857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/secondhouse_web$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1644341353553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/second_house_web$manage.coverage" NAME="manage Coverage Results" MODIFIED="1646039541463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/second_house_web$manage.coverage" NAME="manage Coverage Results" MODIFIED="1646043745255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
