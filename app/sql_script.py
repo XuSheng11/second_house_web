@@ -19,7 +19,7 @@ class FetchInfo():
             print(self.args)
             sql = f'select {",".join(self.args)} from {self.table} where {sql_options} {"and "+ special_option if special_option else ""} limit {self.PAGE_COUNT} offset {offset}'
         else:
-            sql = f'select {",".join(self.args)} from {self.table} where {special_option if special_option else ""} limit {self.PAGE_COUNT} offset {offset}'
+            sql = f'select {",".join(self.args)} from {self.table} {"where "+special_option if special_option else ""} limit {self.PAGE_COUNT} offset {offset}'
         return sql
 
     def init_special_option(self):
