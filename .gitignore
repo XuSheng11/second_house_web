@@ -134,4 +134,5 @@ dmypy.json
 *test*
 
 # pictures
-./app/static/img/
+*.jpg
+*.png
