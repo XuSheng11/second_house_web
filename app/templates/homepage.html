@@ -2,29 +2,761 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="never">
     <title>广州二手房</title>
-    <link href="../static/style.css" rel="stylesheet" type="text/css">
+    <link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/style2.css" />
+
 </head>
 <body>
-<div class="header"></div>
-<div class="filter"></div>
-<div class="content">
-    <ul class="HouseList">
-    {% for house in house_list %}
-        <li>
-            <div class="info">
-                <div class="title">
-                    <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
-                </div>
-                <div class="address">
-                    <a href="{{ url_for('community_info',community_id=house['community_id']) }}">{{ house['community'] }}</a>
-                </div>
-
+    <div class="banner">
+        <div class="container">
+            <ul class="channelList">
+                <li>
+                    <a href={{ url_for('index') }}>首页</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('homepage') }}" style="color: black;font-weight:bolder;">二手房</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('community_page') }}">小区</a>
+                </li>
+                <li>
+                    <a href="">发布房源</a>
+                </li>
+            </ul>
+            <div class="banner-right">
+                <span>热线电话：13640xxxxxx</span>
             </div>
-        </li>
-    {% endfor %}
-    </ul>
-</div>
+        </div>
+    </div>
 
+    <div class="header">
+        <div class="menu">
+            <div class="menuLeft">
+                <a  href="{{ url_for('homepage') }}"></a>
+                <p>更懂生活更懂你</p>
+            </div>
+        <div class="label">
+            <a style="color: #23c993;font-weight: bolder" class="text" href="">在售</a>
+            <a class="text" href="{{ url_for('community_page') }}">小区</a>
+        </div>
+        <div class="search">
+            <div class="input">
+                <form action="/search/" method="get">
+                    <input name="keyword" class="searchInput" type="text" placeholder="请输入关键字" >
+                    <input name="type" value="house" type="hidden">
+                    <button class="submit" type="submit"></button>
+                </form>
+            </div>
+        </div>
+        </div>
+                <div class="top">
+            <i>广州二手房价格top3</i>
+        <ul>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top1.png"></span>
+                <span><a href="{{ url_for('house_info',house_id=top[0]['house_id']) }}">{{ top[0]['title'] }}</a></span>
+                <span>{{ top[0]['total_price'] }}万</span>
+            </li>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top2.png"></span>
+                <span><a href="{{ url_for('house_info',house_id=top[1]['house_id']) }}">{{ top[1]['title'] }}</a></span>
+                <span>{{ top[1]['total_price'] }}万</span>
+            </li>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top3.png"></span>
+                <span><a href="{{ url_for('house_info',house_id=top[2]['house_id']) }}">{{ top[2]['title'] }}</a></span>
+                <span>{{ top[2]['total_price'] }}万</span>
+            </li>
+
+        </ul>
+    </div>
+    </div>
+
+    <div>
+         <div class="m-filter">
+             <div class="position">
+                    <dl>
+                        <h3>
+                            <dt>位置</dt>
+                        </h3>
+                        <dd>
+                            {% if options['label']=='district' %}
+                            <a href="{{ url_for('homepage', district_cn='天河') }}" title="广州二手房" style="color: #00ae66" >区域
+                                <span id="arrow2" class="arrow" style="background-image: url('../static/img/up.png')"></span>
+                            </a>
+                            <a href="{{ url_for('homepage', subway_id='li110460679') }}" title="广州地铁找房" style="color: #474b4e">地铁线
+                                <span id="arrow2" class="arrow" style="background-image: url('../static/img/down.png')"></span>
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('homepage', district_cn='天河') }}" title="广州二手房" style="color: #474b4e" >区域
+                                <span id="arrow2" class="arrow" style="background-image: url('../static/img/down.png')"></span>
+                            </a>
+                            <a href="{{ url_for('homepage', subway_id='li110460679') }}" title="广州地铁找房" style="color: #00ae66">地铁线
+                                <span id="arrow2" class="arrow" style="background-image: url('../static/img/up.png')"></span>
+                            </a>
+                            {% endif %}
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt></dt>
+                        <dd>
+                        {% if options['label']=='district' %}
+                            <div id="ershoufang" class="ershoufang" style="display: block;">
+                                <div>
+                                    {% for district in ['天河','越秀','荔湾','海珠','番禺','白云','黄埔','从化','增城','花都','南沙'] %}
+                                        {% if options['total_price'] and options['size'] and options['layout']%}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],size=options['size'],layout=options['layout'])}}">{{ district }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] and options['size']%}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],size=options['size']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],size=options['size']) }}">{{ district }}</a>
+                                            {% endif %}
+                                        {% elif options['size'] and options['layout']%}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size'],layout=options['layout']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size'],layout=options['layout']) }}">{{ district }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] and options['layout'] %}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],layout=options['layout']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price'],layout=options['layout']) }}">{{ district }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] %}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,total_price=options['total_price']) }}">{{ district }}</a>
+                                            {% endif %}
+                                        {% elif options['size'] %}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size']) }}">
+                                            {% endif %}
+                                        {% elif options['layout'] %}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,layout=options['layout']) }}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,layout=options['layout']) }}">{{ district }}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if district != options['district_cn'] %}
+                                                <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district)}}">{{ district }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district)}}">{{ district }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    {% for region in options['regions'] %}
+                                        {% if options['total_price'] and options['size'] and options['layout']%}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] and options['size']%}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],size=options['size']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],size=options['size']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif options['size'] and options['layout']%}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,size=options['size'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,size=options['size'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif  options['total_price'] and options['layout'] %}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price'],layout=options['layout']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] %}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,total_price=options['total_price']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif options['size'] %}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,size=options['size']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage',district_cn=options['district_cn'],region_cn=region,size=options['size']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% elif options['layout'] %}
+                                            {% if region != options['region_cn'] %}
+                                                <a href="{{ url_for('homepage', district_cn=options['district_cn'], region_cn=region,layout=options['layout']) }}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage', district_cn=options['district_cn'], region_cn=region,layout=options['layout']) }}">{{ region }}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if region != options['region_cn'] %}
+                                                <a  href="{{ url_for('homepage', district_cn=options['district_cn'], region_cn=region)}}">{{ region }}</a>
+                                            {% else %}
+                                                <a class="region_selected" href="{{ url_for('homepage', district_cn=options['district_cn'], region_cn=region)}}">{{ region }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div id="ditiefang" class="ditiefang" style="display: block;">
+                                    {% for sub in subway %}
+                                        {% if options['total_price'] and options['size'] and options['layout']%}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] and options['size']%}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],size=options['size']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],size=options['size']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+
+                                        {% elif options['size'] and options['layout']%}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],size=options['size'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],size=options['size'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% elif  options['total_price'] and options['layout'] %}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% elif options['total_price'] %}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],total_price=options['total_price']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% elif options['size'] %}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],size=options['size']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],size=options['size']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% elif options['layout'] %}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'],layout=options['layout']) }}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if sub['id'] != options['subway_id'] %}
+                                                <a title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'])}}">{{ sub['name'] }}</a>
+                                            {% else %}
+                                                <a class="region_selected" title="广州{{ sub['name'] }}在售二手房" href="{{ url_for('homepage',subway_id=sub['id'])}}">{{ sub['name'] }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            </div>
+                            <div>
+
+                                {% for i in range(options['stations_id'] | length) %}
+                                    {% if options['total_price'] and options['size'] and options['layout']%}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],size=options['size'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif options['total_price'] and options['size']%}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],size=options['size']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],size=options['size']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif options['size'] and options['layout']%}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],size=options['size'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],size=options['size'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif  options['total_price'] and options['layout'] %}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price'],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif options['total_price'] %}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],total_price=options['total_price']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif options['size'] %}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],size=options['size']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage',subway_id=options['subway_id'], station_id=options['stations_id'][i],size=options['size']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% elif options['layout'] %}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage', subway_id=options['subway_id'], station_id=options['stations_id'][i],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage', subway_id=options['subway_id'], station_id=options['stations_id'][i],layout=options['layout']) }}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if options['stations_id'][i] != options['station_id'] %}
+                                            <a href="{{ url_for('homepage', subway_id=options['subway_id'], station_id=options['stations_id'][i])}}">{{ options['stations_name'][i] }}</a>
+                                        {% else %}
+                                            <a class="region_selected" href="{{ url_for('homepage', subway_id=options['subway_id'], station_id=options['stations_id'][i])}}">{{ options['stations_name'][i] }}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        </dd>
+                    </dl>
+                </div>
+            <div class="list_more">
+            <dl class="more">
+                <dt><b>售价</b></dt>
+                <dd>
+
+                {% for price in ['100万以下','100-120万','120-150万','150-200万','200-300万','300-500万','500万以上'] %}
+                    {% if price!= options['total_price'] %}
+                        {% if options['region_cn'] %}
+                            {% if options['size'] and options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=options['size'],total_price=price,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],total_price=price,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],total_price=price,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', total_price=price,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options['size'] and options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=options['size'],total_price=price,district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],total_price=price,district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],total_price=price,district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', total_price=price,district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options['size'] and options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=options['size'],total_price=price,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'], total_price=price,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'], total_price=price,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', total_price=price,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options['size'] and options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=options['size'],total_price=price,subway_id=options['subway_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'], total_price=price,subway_id=options['subway_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'], total_price=price,subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', total_price=price,subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options['size'] and options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=options['size'],total_price=price)}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'], total_price=price)}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'], total_price=price)}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', total_price=price)}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checkbox"></span>
+                            <span>{{ price }}</span>
+                        </a>
+                    {% else %}
+                        {% if options['region_cn'] %}
+                            {% if options['size'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=options['size'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options['size'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=options['size'],district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options['size'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=options['size'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options['size'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=options['size'],subway_id=options['subway_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],subway_id=options['subway_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options['size'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=options['size'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage')}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checked"></span>
+                            <span>{{ price }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </dd>
+            </dl>
+            <dl class="more">
+                <dt><b>房型</b></dt>
+                <dd>
+                {% for layouted in ['1室','2室','3室','4室','5室','5室以上'] %}
+                    {% if layouted!= options['layout'] %}
+                        {% if options['region_cn'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],layout=layouted,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],layout=layouted,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],layout=layouted,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', layout=layouted,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],layout=layouted,district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],layout=layouted,district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],layout=layouted,district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', layout=layouted,district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],layout=layouted,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],layout=layouted,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],layout=layouted,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', layout=layouted,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],layout=layouted,subway_id=options['subway_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],layout=layouted,subway_id=options['subway_id'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],layout=layouted,subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', layout=layouted,subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],layout=layouted)}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],layout=layouted)}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],layout=layouted)}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', layout=layouted)}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checkbox"></span>
+                            <span>{{ layouted }}</span>
+                        </a>
+                    {% else %}
+                        {% if options['region_cn'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['size'] %}
+                                <a href="{{ url_for('homepage', size=options['size'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],district_cn=options['district_cn'])}}">
+                            {% elif options['size']  %}
+                                <a href="{{ url_for('homepage', size=options['size'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['size']  %}
+                                <a href="{{ url_for('homepage',size=options['size'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'],subway_id=options['subway_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],subway_id=options['subway_id'])}}">
+                            {% elif options['size']  %}
+                                <a href="{{ url_for('homepage',size=options['size'],subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options['total_price'] and options['size'] %}
+                                <a href="{{ url_for('homepage',size=options['size'],total_price=options['total_price'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'])}}">
+                            {% elif options['size']  %}
+                                <a href="{{ url_for('homepage',size=options['size'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage')}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checked"></span>
+                            <span>{{ layouted }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </dd>
+            </dl>
+            <dl class="more">
+                <dt><b>面积</b></dt>
+                <dd>
+                {% for sizes in ['40㎡以下','40-60㎡','60-80㎡','80-100㎡','100-120㎡','120-144㎡','144㎡以上'] %}
+                    {% if sizes!= options['size'] %}
+                        {% if options['region_cn'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],size=sizes,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],size=sizes,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=sizes,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', size=sizes,region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],size=sizes,district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],size=sizes,district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],size=sizes,district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', size=sizes,district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],size=sizes,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],size=sizes,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=sizes,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', size=sizes,subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],size=sizes,subway_id=options['subway_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],size=sizes,subway_id=options['subway_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=sizes,subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', size=sizes,subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],size=sizes)}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],size=sizes)}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],size=sizes)}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage', size=sizes)}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checkbox"></span>
+                            <span>{{ sizes }}</span>
+                        </a>
+                    {% else %}
+                        {% if options['region_cn'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',region_cn=options['region_cn'],district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['district_cn'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],district_cn=options['district_cn'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],district_cn=options['district_cn'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage', layout=options['layout'],district_cn=options['district_cn'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',district_cn=options['district_cn'])}}">
+                            {% endif %}
+                        {% elif options['station_id'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'],station_id=options['station_id'])}}">
+                            {% endif %}
+                        {% elif options['subway_id'] %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'],subway_id=options['subway_id'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'],subway_id=options['subway_id'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'],subway_id=options['subway_id'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage',subway_id=options['subway_id'])}}">
+                            {% endif %}
+                        {% else %}
+                            {% if options ['total_price'] and options['layout']%}
+                                <a href="{{ url_for('homepage',layout=options['layout'],total_price=options['total_price'])}}">
+                            {% elif options['total_price'] %}
+                                <a href="{{ url_for('homepage',total_price=options['total_price'])}}">
+                            {% elif options['layout'] %}
+                                <a href="{{ url_for('homepage',layout=options['layout'])}}">
+                            {% else %}
+                                <a href="{{ url_for('homepage')}}">
+                            {% endif %}
+                        {% endif %}
+                            <span class="checked"></span>
+                            <span>{{ sizes }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </dd>
+            </dl>
+        </div>
+         </div>
+    </div>
+
+
+<!--房型展示部分  -->
+    <div class="content">
+<!-- 选择框-->
+        <div class="orderTag">
+            <ul>
+                <li class="li_selected">
+                    <h3><a>全部</a></h3>
+                </li>
+                <li >
+                    <h3><a>房屋总价</a></h3>
+                </li>
+                <li >
+                    <h3><a>房屋面积</a></h3>
+                </li>
+                <li >
+                    <h3><a>挂牌时间</a></h3>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="totle_num">
+            <h2>共找到<span id="totalNum">{{ nums }}</span>套二手房</h2>
+        </div>
+         <ul class="sellListContent">
+             {% for house in house_list %}
+                <li>
+                {% if house['cover'] %}
+                    <img alt="" src="{{ house['cover'] }}"/>
+                {% else %}
+                    <img alt="" src="../static/img/blank.png"/>
+                {% endif %}
+                <div class="info">
+                    <div class="priceInfo">
+                        <div class="totle_price">
+                            {% if house['total_price'] %}
+                                <h1>{{ house['total_price'] }}万</h1>
+                                <span>{{ house['unit_price'] }}元/米</span>
+                            {% else %}
+                                <h1>暂无数据</h1>
+                                <span>暂无数据</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h3><a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a></h3>
+
+                    <div class="address">
+                        <a class="address_icon"></a>
+                        <a href="{{ url_for('community_info',community_id=house['community_id']) }}">{{ house['community'] }}</a>
+                        <a href="{{ url_for('homepage',district_cn=house['district_cn']) }}" style="margin-left: 50px">{{ house['district_cn'] }}</a>
+                        <a href="{{ url_for('homepage',district_cn=house['district_cn'],region_cn=house['region_cn']) }}" style="margin-left: 15px">{{ house['region_cn'] }}</a>
+                    </div>
+                    <div class="houseinfo">
+                        <a class="house_icon"></a>
+                        <span>{{ house['layout'] }} | {{ house['size'] }}平米</span>
+                    </div>
+                 </div>
+                </li>
+             {% endfor %}
+         </ul>
+    </div>
+<div class="page-icon">
+    <button onclick="page_option(-1)" class="firstPage"><img alt="" src="../static/img/left-end.png"/></button>
+    <button onclick="page_option(-3)" class="beforePage"><img alt="" src="../static/img/page-left.png"/></button>
+    <button>第<input id="currentPage" onchange="page_turn()" type="text" value="1"/>页</button>
+    <button>/&nbsp;&nbsp;&nbsp;共<input id="totalPage" type="button" value="88" >页</button>
+    <button onclick="page_option(-4)" class="nextPage"><img alt="" src="../static/img/page-right.png"/></button>
+    <button onclick="page_option(-2)" class="lastPage"><img alt="" src="../static/img/right-end.png"/></button>
+</div>
+<script type="application/javascript" src="../static/JS/page.js"></script>
 </body>
 </html>

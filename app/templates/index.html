@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <title>二手房</title>
+</head>
+<link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/CSS/style.css" />
+
+<body>
+<!--begin:header样式    图片部分-->
+<div class="header">
+    <div class="header-wrapper clearfix">
+        <!--(左)-->
+        <div class="header-fl clearfix">
+<!--            logo-->
+            <a class="logo"></a>
+<!--            目前仅有广州-->
+            <span class="txtchange"><i></i>广州</span>
+        </div>
+<!--      标语：  连接每一个家庭-->
+        <div class="title"></div>
+<!--        开始找房-->
+        <div class="headerMin">
+            <form class="searchMin-search clearfix" action="secondhouse/" method="get">
+                <button class="search-btn" >
+                    开始找房</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<br>
+<!--下方介绍图部分-->
+<div class="wrapper">
+    <div class="f1">
+        <div class="name"></div>
+        <p>好房源那么多，我们为你精选，我们会越来越懂你
+            <a href="{{ url_for('homepage') }}">->更多广州二手房</a>
+        </p>
+        <br>
+    </div>
+    <div class="clear"></div>
+    <ul>
+        <li class="pic">
+            <a href="{{ url_for('house_info',house_id='108403032368') }}">
+            <img src="../static/img/pic1.jpg"/>
+            <div class="bottom">
+                <p class="position">
+                    增城·朱村
+                </p>
+                <p class="position">荔富湖畔</p>
+                <p class="tips">
+                    <span>4室2厅·145.93平米</span>
+                    <span class="tips_price">223万</span>
+                </p>
+            </div>
+            </a>
+        </li>
+        <li class="pic">
+            <a href="{{ url_for('house_info',house_id='108403117610') }}">
+            <img src="../static/img/pic2.jpg"/>
+            <div class="bottom">
+                <p class="position">增城·朱村</p>
+                <p class="position">金泽豪庭</p>
+                <p class="tips">
+                    <span>3室2厅·91.07平米</span>
+                    <span class="tips_price">188万</span>
+                </p>
+            </div>
+            </a>
+        </li>
+        <li class="pic">
+            <a href="{{ url_for('house_info',house_id='108403086309') }}">
+            <img src="../static/img/pic3.jpg"/>
+            <div class="bottom">
+                <p class="position">
+                    海珠·东晓路
+                </p>
+                <p class="position">东翠花园</p>
+                <p class="tips">
+                    <span>3室2厅·87.45平米</span>
+                    <span class="tips_price">420万</span>
+                </p>
+            </div>
+            </a>
+        </li>
+        <li class="pic">
+            <a href="{{ url_for('house_info',house_id='108403117290') }}">
+            <img src="../static/img/pic4.jpg"/>
+            <div class="bottom">
+                <p class="position">
+                    天河·珠江新城中
+                </p>
+                <p class="position">嘉裕公馆</p>
+                <p class="tips">
+                    <span>3室1厅·119.76平米</span>
+                    <span class="tips_price">2030万</span>
+                </p>
+            </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('house_info',house_id='108403124332') }}">
+            <img src="../static/img/pic5.jpg"/>
+            <div class="bottom">
+                <p class="position">
+                    增城·新塘南
+                </p>
+                <p class="position">锦绣新天地</p>
+                <p class="tips">
+                    <span>4室1厅·134.16平米</span>
+                    <span class="tips_price">239万</span>
+                </p>
+            </div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+</body>
+
+</html>

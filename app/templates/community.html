@@ -2,27 +2,189 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>广州{{ name }}小区信息</title>
+    <meta name="referrer" content="never">
+    <title>二手房</title>
 </head>
+<link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/CSS/community.css" />
+<link rel="stylesheet" type="text/css" href="../static/CSS/header.css">
+<script type="application/javascript" src="../static/JS/jquery.min.js"></script>
 <body>
-<h1>{{ name }}</h1>
-<br>
-{{ address }}
-<ul>
-    {% for key,value in features.items() %}
-        <li>
-            {{ key }} : {{ value }}
-        </li>
-        <br>
-    {% endfor %}
-</ul>
-<ul>
-    {% for picture in pictures %}
-        <li>
-            <img src="{{ picture }}" alt=""/>
-        </li>
-        <br>
-    {% endfor %}
-</ul>
+<!--顶部菜单栏-->
+<div class="banner">
+    <div class="container">
+        <ul class="channelList">
+                <li>
+                    <a href={{ url_for('index') }}>首页</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('homepage') }}">二手房</a>
+                </li>
+            <li>
+                <a href="{{ url_for('community_page') }}" style="color: black;font-weight:bolder;">小区</a>
+            </li>
+            <li>
+                <a href="">发布房源</a>
+            </li>
+        </ul>
+        <div class="banner-right">
+            <span>热线电话：13640xxxxxx</span>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="menu">
+        <div class="menuLeft">
+            <a  href="{{ url_for('homepage') }}"></a>
+            <p>更懂生活更懂你</p>
+        </div>
+        <div class="label">
+            <a class="text" href="{{ url_for('homepage') }}">在售</a>
+            <a style="color: #23c993;font-weight: bolder" class="text" href="">小区</a>
+        </div>
+        <div class="search">
+            <div class="input">
+                <form action="/search/" method="get">
+                    <input name="keyword" class="searchInput" type="text" placeholder="请输入关键字" >
+                    <input name="type" value="community" type="hidden">
+                    <button class="submit" type="submit"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+            <div class="top">
+            <i>广州二手房小区价格top3</i>
+        <ul>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top1.png"></span>
+                <span><a href="{{ url_for('community_info',community_id=top[0]['id']) }}">{{ top[0]['name'] }}</a></span>
+                <span>{{ top[0]['unit_price'] }}元/平方米</span>
+            </li>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top2.png"></span>
+                <span><a href="{{ url_for('community_info',community_id=top[1]['id']) }}">{{ top[1]['name'] }}</a></span>
+                <span>{{ top[1]['unit_price'] }}元/平方米</span>
+            </li>
+            <li>
+                <span class="top_img"><img alt="" src="../static/img/top3.png"></span>
+                <span><a href="{{ url_for('community_info',community_id=top[2]['id']) }}">{{ top[2]['name'] }}</a></span>
+                <span>{{ top[2]['unit_price'] }}元/平方米</span>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<!--引导栏部分-->
+<div>
+    <div class="m-filter">
+        <div class="position">
+            <dl>
+                <h3>
+                    <dt>位置</dt>
+                </h3>
+                <dd>
+                    <a class="selected" id="area" style="color: #00ae66" onclick=replace(1) title="广州二手房" >区域
+                        <span id= "arrow1"class="arrow"></span>
+                    </a>
+
+                </dd>
+            </dl>
+
+            <dl>
+                <dt></dt>
+                <dd>
+                    <div id="ershoufang" class="ershoufang" style="display: block;" >
+                        <div>
+                            {% for district in ['天河','越秀','荔湾','海珠','番禺','白云','黄埔','从化','增城','花都','南沙'] %}
+                                {% if district != options['district_cn'] %}
+                                    <a title="广州{{ district }}在售二手房" href="{{ url_for('community_page',district_cn=district)}}">{{ district }}</a>
+                                {% else %}
+                                    <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('community_page',district_cn=district)}}">{{ district }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            {% for region in options['regions'] %}
+                                  {% if region != options['region_cn'] %}
+                                      <a  href="{{ url_for('community_page', district_cn=options['district_cn'], region_cn=region)}}">{{ region }}</a>
+                                  {% else %}
+                                      <a class="region_selected" href="{{ url_for('community_page', district_cn=options['district_cn'], region_cn=region)}}">{{ region }}</a>
+                                  {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </dd>
+            </dl>
+        </div>
+</div>
+<!--房型展示部分  -->
+<div class="content">
+    <!-- 选择框-->
+    <div class="orderTag">
+        <ul>
+            <li class="li_selected">
+                <h3><a>全部小区</a></h3>
+            </li>
+        </ul>
+    </div>
+
+    <div class="totle_num">
+        <h2>共找到<span id="totalNum">{{ nums }}</span>个小区</h2>
+    </div>
+
+         <ul class="sellListContent">
+             {% for community in community_list %}
+                <li>
+                {% if community['cover'] %}
+                    <img alt="" src="{{ community['cover'] }}"/>
+                {% else %}
+                    <img alt="" src="../static/img/blank.png"/>
+                {% endif %}
+            <div class="info">
+                <div class="priceInfo">
+                    <div class="totle_price">
+                        {% if community['unit_price'] %}
+                            <h1>{{ community['unit_price'] }}元/m2</h1>
+                        {% else %}
+                            <h1>暂无数据</h1>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3><a href="{{ url_for('community_info',community_id=community['community_id']) }}">{{ community['name'] }}</a></h3>
+
+                <div class="address">
+                    <a class="address_icon"></a>
+                    <a href="{{ url_for('community_page', district_cn=community['district_cn'])}}">{{ community['district_cn'] }}</a>
+                    <a href="{{ url_for('community_page', district_cn=community['district_cn'], region_cn=community['region_cn'])}}">{{ community['region_cn'] }}</a>
+                    <span style="margin-left: 10px">{{ community['year'] }}</span>
+                </div>
+                <div class="houseinfo">
+                    <a class="house_icon"></a>
+                    <span>{{ community['address'] }}</span>
+                </div>
+            </div>
+                </li>
+             {% endfor %}
+         </ul>
+
+    <!-- 分页-->
+    <div class="page-icon">
+        <button onclick="page_option(-1)" class="firstPage"><img alt="" src="../static/img/left-end.png"/></button>
+        <button onclick="page_option(-3)" class="beforePage"><img alt="" src="../static/img/page-left.png"/></button>
+        <button>第<input id="currentPage" onchange="page_turn()" type="text" value="1"/>页</button>
+        <button>/&nbsp;&nbsp;&nbsp;共<input id="totalPage" type="button" value="88" >页</button>
+        <button onclick="page_option(-4)" class="nextPage"><img alt="" src="../static/img/page-right.png"/></button>
+        <button onclick="page_option(-2)" class="lastPage"><img alt="" src="../static/img/right-end.png"/></button>
+    </div>
+
+</div>
+
+
+</div>
+<script type="application/javascript" src="../static/JS/page.js"></script>
 </body>
 </html>

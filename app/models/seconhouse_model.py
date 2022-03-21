@@ -19,8 +19,8 @@ class GuangZhouRegion(db.Entity):
     _table_ = 'guangzhou_region'
     region_py = Required(str)
     region_cn = Required(str)
-    district_py = Required(str)
-    PrimaryKey(region_py, district_py)
+    district_cn = Required(str)
+    PrimaryKey(region_py, district_cn)
 
 
 # 广州地铁站表
@@ -29,6 +29,13 @@ class GuangZhouSubwayStation(db.Entity):
     id = PrimaryKey(str)
     name = Required(str)
     subway_id = Required(str)
+
+
+# 广州地铁表
+class GuangZhouSubway(db.Entity):
+    _table_ = 'guangzhou_subway'
+    id = PrimaryKey(str)
+    name = Required(str)
 
 
 # 广州二手房普通信息表
@@ -94,6 +101,7 @@ class GuangZhouCommunityInfo(db.Entity):
     unit_price = Optional(str, nullable=True)
     features = Optional(Json, nullable=True)
     pictures = Optional(Json, nullable=True)
+
 
 # 映射到数据库，不直接建表
 db.generate_mapping(create_tables=False)

@@ -1,0 +1,457 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+body {
+    font-size: 14px;
+    color: #333;
+    font-family: "微软雅黑";
+    margin-top: -5px;
+    align-items: center;
+
+}
+
+/*头部*/
+.banner {
+    background-color: #f3f5fb;
+    line-height: 38px;
+    font-size: 12px;
+}
+
+.banner .container {
+    width: 1150px;
+    margin: 0 auto;
+}
+
+.banner .container ul li{
+    display: inline-block;
+    margin-right: 21.5px;
+    position: relative;
+}
+.banner .container .channelList{
+    display: table-cell;
+    white-space: nowrap;
+}
+
+.banner .container ul li a{
+    color: #474b4e;
+    text-decoration: none;
+}
+.banner .container ul li a:hover{
+    color: black;
+    text-decoration: none;
+    font-weight:bolder;
+}
+
+.banner .container .banner-right{
+
+    display: table-cell;
+    width: 1000px;
+    text-align: right;
+    color: black;
+}
+
+.banner .container .banner-right .tel{
+    color: #a9abab;
+}
+
+
+.header{
+    line-height: 1;
+    padding: 30px 0 1px;
+}
+
+.header .menu{
+    width: 1150px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.header .menu .menuLeft{
+    float: left;
+    width: 20%;
+    display: inline-block;
+}
+
+.header .menu .menuLeft a,p{
+    margin-bottom: 20px;
+}
+
+.header .menu .search{
+    float: left;
+    width: 500px;
+    height: 50px;
+    margin-left: 30px;
+}
+
+
+.header .menu .label{
+    margin-top: 15px;
+    font-size: 16px;
+    float: left;
+}
+.header .menu .label .text{
+    margin-right: 15px;
+    color: #101D37;
+}
+
+
+.header .menu .search input{
+    float: left;
+    display: block;
+    width: 345px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.header .menu .search .submit{
+    border: none;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url(../img/search.png);
+}
+
+.header .menu .search .submit:hover{
+    cursor: pointer;
+}
+
+
+.header .menu .menuLeft a{
+    background-image: url(../img/logo_2.png);
+    width: 103px;
+    height: 32px;
+    display: inline-block;
+}
+
+.header .menu .menuLeft p{
+    color: #474b4e;
+    font-size: 18px;
+    font-family: "Calibri Light", serif;
+    width: 100%;
+}
+
+
+.sellDetailHeader {
+    margin: 0 auto;
+    padding: 13px 13px ;
+    background-color: #fff;
+    width: 1150px;
+}
+
+.sellDetailHeader .title-wrapper{
+    position: relative;
+}
+
+.sellDetailHeader .title-wrapper .content {
+    display: inline-block;
+    width:  100%;
+    vertical-align: middle;
+    line-height: 1;
+
+}
+
+.sellDetailHeader .title-wrapper .content h1{
+    text-align: left;
+}
+
+.sellDetailHeader .title-wrapper .content .title .detail{
+    color: #999999;
+    padding:  10px 0;
+}
+
+
+
+
+.intro {
+    width: 1150px;
+    height: 35px;
+    line-height: 66px;
+    background: #ffffff;
+    border-top: 0;
+    margin: 0 auto;
+}
+
+.intro .text{
+    font-size: 12px;
+
+}
+
+.intro .text a,span{
+    color: #aaaaaa;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+
+
+/*滚动图*/
+.overview{
+    overflow: hidden;
+    width: 1150px;
+    margin: 30px auto;
+    position: relative;
+}
+.shell {
+    float: left;
+    width: 710px;
+    height:400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 10px #fff solid;
+}
+
+.shell span{
+    position: relative;
+    background-color: rgba(0,0,0,0.7);
+    font-size: 12px;
+    color: #ffffff;
+    padding: 0 11px;
+    line-height: 32px;
+    border-radius: 2px;
+}
+
+.images {
+    width: 600%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    left: 0;
+    transition: .2s;
+}
+
+.img{
+    width: 100%;
+    background-size: cover;
+}
+/*.img:nth-child(1){*/
+/*    background-image: url(img/1.jpg);*/
+/*}*/
+/*.img:nth-child(2){*/
+/*    background-image: url(img/2.jpg);*/
+/*}*/
+/*.img:nth-child(3){*/
+/*    background-image: url(img/3.jpg);*/
+/*}*/
+/*.img:nth-child(4){*/
+/*    background-image: url(img/4.jpg);*/
+/*}*/
+/*.img:nth-child(5){*/
+/*    background-image: url(img/5.jpg);*/
+/*}*/
+/*.img:nth-child(6){*/
+/*    background-image: url(img/6.jpg);*/
+/*}*/
+
+.min-images {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 20px;
+    width: 40%;
+    z-index: 999;
+    right: 10%;
+}
+
+.min{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-size: cover;
+    border: solid rgba(255, 255, 255, 0.5) 5px;
+    background-position: -20px 0;
+}
+
+/*.min:nth-child(1){*/
+/*    background-image: url(img/1.jpg);*/
+/*}*/
+/*.min:nth-child(2){*/
+/*    background-image: url(img/2.jpg);*/
+/*}*/
+/*.min:nth-child(3){*/
+/*    background-image: url(img/3.jpg);*/
+/*}*/
+/*.min:nth-child(4){*/
+/*    background-image: url(img/4.jpg);*/
+/*}*/
+/*.min:nth-child(5){*/
+/*    background-image: url(img/5.jpg);*/
+/*}*/
+/*.min:nth-child(6){*/
+/*    background-image: url(img/6.jpg);*/
+/*}*/
+
+.button {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    display: flex;
+    justify-content: space-between;
+    user-select:none;
+}
+
+.button-left,
+.button-right {
+    font-size: 50px;
+
+    padding: 0 5px;
+    cursor: pointer;
+    line-height: 420px;
+}
+
+.overview .content{
+    margin-top: 50px;
+    float: right;
+    width: 400px;
+    line-height: 1;
+    position: relative;
+}
+
+.overview .content .price_content .total_price{
+    overflow: hidden;
+    height: 46px;
+}
+
+.overview .content .price_content .total_price span{
+    display: inline-block;
+    font-size: 46px;
+    line-height: 46px;
+    color: #e4393c;
+    font-weight: bold;
+    overflow: hidden;
+    float: left;
+}
+.overview .content .price_content .total_price {
+    font-size: 15px;
+    bottom: 30px;
+    font-weight: bold;
+    position: relative;
+}
+
+
+.overview .content  .communityInfo{
+    padding: 9px 0;
+    line-height: 18px;
+
+}
+
+
+
+.overview .content .communityInfo .label{
+    color: #aeb0b1;
+    margin-right: 24px;
+    line-height: 20px;
+
+}
+
+.overview .content .communityInfo .info{
+    color: #101D37;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+/*房源全信息*/
+.m-content{
+    width: 1150px;
+    margin: 0 auto;
+    padding-top: 50px;
+    border-top: 2px solid #eeeeee;
+    border-bottom: 2px solid #eeeeee;
+}
+
+.m-content .goodSell .goodSellHeader{
+    overflow: hidden;
+}
+
+.m-content .goodSell .goodSellHeader .fl{
+    font-size: 23px;
+    color: #394043;
+    float: left;
+    font-weight: bold;
+}
+
+
+.m-content .goodSell  ol{
+    overflow: hidden;
+    margin-top: 37px;
+    margin-right: -10px;
+    margin-bottom: 50px;
+    display: block;
+}
+
+.m-content .goodSell  ol li {
+    margin-right: 50px;
+    width: 230px;
+    float: left;
+}
+
+.m-content .goodSell  ol li .goodSellItemPic {
+    display: block;
+    position: relative;
+    width: 230px;
+    height: 160px;
+}
+.m-content .goodSell  ol li .goodSellItemPic img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.m-content .goodSell  ol li .goodSellItemPrice{
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    color: #ffffff;
+    padding: 6px;
+    font-size: 12px;
+    background-color: #394043;
+}
+
+.m-content .goodSell  ol li .goodSellItemTitle{
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.m-content .goodSell  ol li .goodSellItemTitle a{
+    color: #394043;
+}
+
+
+.m-content .goodSell  ol li .goodSellItemDesc{
+    margin-top: 8px;
+    font-size: 12px;
+    color: #7f8183;
+}
+
+.last {
+    height: 38px;
+    background-color: #f3f5fb;
+    font-size: 12px;
+}

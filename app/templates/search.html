@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <title>二手房</title>
+</head>
+<link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/CSS/style2.css" />
+<link rel="stylesheet" type="text/css" href="../static/CSS/header.css">
+<script type="application/javascript" src="../static/JS/jquery.min.js"></script>
+
+<body>
+<!--顶部菜单栏-->
+<div class="banner">
+    <div class="container">
+        <ul class="channelList">
+            <li>
+                <a href="{{ url_for('index') }}">首页</a>
+            </li>
+            {% if options['type']=='house' %}
+                <li>
+                    <a href="{{ url_for('homepage') }}" style="color: black;font-weight:bolder;">二手房</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('community_page') }}">小区</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ url_for('homepage') }}" >二手房</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('community_page') }}" style="color: black;font-weight:bolder;">小区</a>
+                </li>
+            {% endif %}
+            <li>
+                <a href="">发布房源</a>
+            </li>
+        </ul>
+        <div class="banner-right">
+            <span>热线电话：13640xxxxxx</span>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="menu">
+
+        <div class="menuLeft">
+            <a  href="homepage.html"></a>
+            <p>更懂生活更懂你</p>
+        </div>
+        <div class="label">
+            {% if options['type']=='house' %}
+                <a style="color: #23c993;font-weight: bolder" class="text" href="{{ url_for('homepage') }}">在售</a>
+                <a class="text" href="{{ url_for('community_page') }}">小区</a>
+            {% else %}
+                <a class="text" href="{{ url_for('homepage') }}">在售</a>
+                <a style="color: #23c993;font-weight: bolder" class="text" href="{{ url_for('community_page') }}">小区</a>
+            {% endif %}
+        </div>
+
+        <div class="search">
+            <div class="input">
+                <form action="/search/" method="get">
+                    <input name="keyword" class="searchInput" type="text" placeholder="{{ options['keyword'] }}" >
+                    <input name="type" value="{{ options['type'] }}" type="hidden">
+                    <button class="submit" type="submit"></button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--房型展示部分  -->
+<div class="content">
+    <!-- 选择框-->
+    <div class="orderTag">
+        <ul>
+            <li class="li_selected">
+                <h3><a>全部</a></h3>
+            </li>
+        </ul>
+    </div>
+
+    <div class="totle_num">
+        <h2>已为您找到<span id="totalNum">{{ nums }}</span>个结果</h2>
+    </div>
+
+    <ul class="sellListContent">
+        {% if options['type']=='house' %}
+            {% for house in house_list %}
+                <li>
+                {% if house['cover'] %}
+                    <img alt="" src="{{ house['cover'] }}"/>
+                {% else %}
+                    <img alt="" src="../static/img/blank.png"/>
+                {% endif %}
+                <div class="info">
+                    <div class="priceInfo">
+                        <div class="totle_price">
+                            {% if house['total_price'] %}
+                                <h1>{{ house['total_price'] }}万</h1>
+                                <span>{{ house['unit_price'] }}元/米</span>
+                            {% else %}
+                                <h1>暂无数据</h1>
+                                <span>暂无数据</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h3><a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a></h3>
+
+                    <div class="address">
+                        <a class="address_icon"></a>
+                        <a href="{{ url_for('community_info',community_id=house['community_id']) }}">{{ house['community'] }}</a>
+                        <a href="{{ url_for('homepage',district_cn=house['district_cn']) }}" style="margin-left: 50px">{{ house['district_cn'] }}</a>
+                        <a href="{{ url_for('homepage',district_cn=house['district_cn'],region_cn=house['region_cn']) }}" style="margin-left: 15px">{{ house['region_cn'] }}</a>
+                    </div>
+                    <div class="houseinfo">
+                        <a class="house_icon"></a>
+                        <span>{{ house['layout'] }} | {{ house['size'] }}平米</span>
+                    </div>
+                 </div>
+                </li>
+             {% endfor %}
+        {% else %}
+            {% for community in community_list %}
+                <li>
+                {% if community['cover'] %}
+                    <img alt="" src="{{ community['cover'] }}"/>
+                {% else %}
+                    <img alt="" src="../static/img/blank.png"/>
+                {% endif %}
+            <div class="info">
+                <div class="priceInfo">
+                    <div class="totle_price">
+                        {% if community['unit_price'] %}
+                            <h1>{{ community['unit_price'] }}元/m2</h1>
+                        {% else %}
+                            <h1>暂无数据</h1>
+                        {% endif %}
+                    </div>
+                </div>
+                <h3><a href="{{ url_for('community_info',community_id=community['community_id']) }}">{{ community['name'] }}</a></h3>
+
+                <div class="address">
+                    <a class="address_icon"></a>
+                    <a href="{{ url_for('community_page', district_cn=community['district_cn'])}}">{{ community['district_cn'] }}</a>
+                    <a href="{{ url_for('community_page', district_cn=community['district_cn'], region_cn=community['region_cn'])}}">{{ community['region_cn'] }}</a>
+                    <span style="margin-left: 10px">{{ community['year'] }}</span>
+                </div>
+                <div class="houseinfo">
+                    <a class="house_icon"></a>
+                    <span>{{ community['address'] }}</span>
+                </div>
+            </div>
+                </li>
+             {% endfor %}
+        {% endif %}
+    </ul>
+
+    <!-- 分页-->
+    <div class="page-icon">
+        <button onclick="page_option(-1)" class="firstPage"><img alt="" src="../static/img/left-end.png"/></button>
+        <button onclick="page_option(-3)" class="beforePage"><img alt="" src="../static/img/page-left.png"/></button>
+        <button>第<input id="currentPage" onchange="page_turn()" type="text" value="1"/>页</button>
+        <button>/&nbsp;&nbsp;&nbsp;共<input id="totalPage" type="button" value="88" >页</button>
+        <button onclick="page_option(-4)" class="nextPage"><img alt="" src="../static/img/page-right.png"/></button>
+        <button onclick="page_option(-2)" class="lastPage"><img alt="" src="../static/img/right-end.png"/></button>
+    </div>
+
+</div>
+
+
+
+</body>
+<script type="application/javascript" src="../static/JS/page.js">
+</script>
+</html>

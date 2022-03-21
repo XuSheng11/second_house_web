@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>广州二手房</title>
+  <meta name="referrer" content="never">
+</head>
+<link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/CSS/community_info.css" />
+<script type="application/javascript" src="../static/JS/jquery.min.js"></script>
+
+
+<body>
+<!--顶部菜单栏-->
+<div class="banner">
+  <div class="container">
+    <ul class="channelList">
+      <li>
+        <a href={{ url_for('index') }}>首页</a>
+      </li>
+      <li>
+        <a href="{{ url_for('homepage') }}" >二手房</a>
+      </li>
+      <li>
+        <a href="{{ url_for('community_page') }}" style="color: black;font-weight:bolder;">小区</a>
+      </li>
+      <li>
+        <a href="">发布房源</a>
+      </li>
+    </ul>
+    <div class="banner-right">
+      <span>热线电话：13640xxxxxx</span>
+    </div>
+  </div>
+</div>
+
+<div class="header">
+  <div class="menu">
+    <div class="menuLeft">
+      <a  href="{{ url_for('homepage') }}"></a>
+      <p>更懂生活更懂你</p>
+    </div>
+    <div class="label">
+      <a class="text" href="{{ url_for('homepage') }}">在售</a>
+      <a style="font-weight: bolder;color: #23c993" class="text" href="{{ url_for('community_page') }}">小区</a>
+    </div>
+    <div class="search">
+      <div class="input">
+                <form action="/search/" method="get">
+                    <input name="keyword" class="searchInput" type="text" placeholder="请输入关键字" >
+                    <input name="type" value="community" type="hidden">
+                    <button class="submit" type="submit"></button>
+                </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sellDetailHeader">
+    <div class="title-wrapper">
+      <div class="content">
+        <div class="title">
+          <h1><a>{{ name }}</a></h1>
+          <div class="detail"><a>{{ address }}</a></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="intro">
+  <div class="text">
+    <a href="{{ url_for('index') }}">广州房地产网</a>
+    <span> > </span>
+    <a href="{{ url_for('community_page') }}">广州小区</a>
+    <span> > </span>
+    <a href="{{ url_for('community_page',district_cn=district) }}">{{ district }}</a>
+    <span> > </span>
+    <a href="{{ url_for('community_page',district_cn=district,region_cn=region) }}">{{ region }}</a>
+    <span> > </span>
+    <a href="">{{ name }}</a>
+  </div>
+</div>
+
+<!--轮播图-->
+<div class="overview">
+  <div class="shell">
+        {% if pictures %}
+        <ul class="images">
+            {% for picture in pictures %}
+                <li class="img"><img alt="" src="{{ picture }}"/></li>
+            {% endfor %}
+        </ul>
+        <ul class="min-images">
+            {% for picture in pictures %}
+                <li class="min" style="background-image: url('{{ picture }}')"></li>
+            {% endfor %}
+        </ul>
+        <div class="button">
+            <div class="button-left"><</div>
+            <div class="button-right">></div>
+        </div>
+    {% else %}
+        <ul class="images">
+            <li class="img"><img alt="" src="../static/img/blank.png"/></li>
+        </ul>
+    {% endif %}
+
+  </div>
+  <div class="content">
+    <div class="price_content">
+      <div class="total_price">
+          {% if unit_price %}
+              <span>{{ unit_price }}元/平方米</span>
+          {% else %}
+              <span>暂无数据</span>
+          {% endif %}
+      </div>
+    </div>
+    <div class="communityInfo">
+        {% for key,value in features.items() %}
+          <div class="communityInfo">
+            <span class="label">{{ key }}</span>
+            <span class="info" >{{ value }}</span>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="goodSell">
+      <div class="goodSellHeader">
+          <h3 class="fl">{{ name }}优质二手房</h3>
+      </div>
+    <ol>
+        {% for house in recommend %}
+            <li>
+            <a class="goodSellItemPic">
+                {% if house['cover'] %}
+                    <img alt="" src="{{ house['cover'] }}">
+                {% else %}
+                    <img alt="" src="../static/img/blank.png">
+                {% endif %}
+              <span class="goodSellItemPrice">¥{{ house['total_price'] }}万</span>
+            </a>
+            <div class="goodSellItemTitle">
+                <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
+            </div>
+          <div class="goodSellItemDesc">
+            {{ house['size'] }}/{{ house['layout'] }}
+          </div>
+        </li>
+        {% endfor %}
+
+    </ol>
+  </div>
+
+</div>
+
+<div class="last"></div>
+</body>
+<script type="application/javascript" src="../static/JS/js.js"></script>
+</html>

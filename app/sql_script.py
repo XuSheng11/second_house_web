@@ -1,43 +1,33 @@
-from app.models.seconhouse_model import *
+import copy
 
 
-class FetchInfo():
-    PAGE_COUNT = 30
+class GenerateOptions():
+    def __init__(self, options):
+        self.options = copy.deepcopy(options)
 
-    def __init__(self, *args, options, table):
-        self.args = args[0]
-        self.options = options
-        self.table = table
-
-    def init_sql(self, special_option):
-        page = 1
-        if self.options.get('page'):
-            page = int(self.options.pop('page'))
-        offset = self.PAGE_COUNT * (page - 1)
-        sql_options = '%,'.join('%s=%r' % (key, self.options[key]) for key in self.options.keys())
-        if sql_options:
-            print(self.args)
-            sql = f'select {",".join(self.args)} from {self.table} where {sql_options} {"and "+ special_option if special_option else ""} limit {self.PAGE_COUNT} offset {offset}'
+    def init_option(self, options):
+        if not options:
+            sql_options = ''
         else:
-            sql = f'select {",".join(self.args)} from {self.table} {"where "+special_option if special_option else ""} limit {self.PAGE_COUNT} offset {offset}'
-        return sql
+            special_option = self.init_special_option(options=options)
+            sql_options = ['%s=%r' % (key, options[key]) for key in options.keys()]
+            sql_options = f'{" and ".join(sql_options + special_option) if special_option else " and ".join(sql_options)}'
+        return sql_options
 
-    def init_special_option(self):
+    def init_special_option(self, options):
         pass
 
-    def fetch(self):
-        special_option = self.init_special_option()
-        sql = self.init_sql(special_option)
-        print(sql)
-        results = db.execute(sql=sql).fetchall()
-        return results
+    def generate(self):
+        sql_options = self.init_option(options=self.options)
+        print(sql_options)
+        return sql_options
 
 
-class FetchHouseInfo(FetchInfo):
-    def init_special_option(self):
+class HouseGenerateOptions(GenerateOptions):
+    def init_special_option(self, options):
         special_options = []
-        if self.options.get('total_price'):
-            total_price = self.options.pop('total_price')
+        if options.get('total_price'):
+            total_price = options.pop('total_price')
             if '-' in total_price:
                 price_option = 'total_price between %s and %s' % (
                     total_price.split('-')[0], total_price.split('-')[1][:-1])
@@ -46,8 +36,8 @@ class FetchHouseInfo(FetchInfo):
             else:
                 price_option = 'total_price>%s' % (total_price[:-3])
             special_options.append(price_option)
-        if self.options.get('size'):
-            size = self.options.pop('size')
+        if options.get('size'):
+            size = options.pop('size')
             if '-' in size:
                 size_option = 'size between %s and %s' % (size.split('-')[0], size.split('-')[1][:-1])
             elif '以下' in size:
@@ -55,8 +45,12 @@ class FetchHouseInfo(FetchInfo):
             else:
                 size_option = 'size>%s' % (size[:-3])
             special_options.append(size_option)
-        return ' and'.join(special_options)
+        if options.get('layout'):
+            layout = options.pop('layout')
+            if '以上' not in layout:
+                layout_option = 'layout like %r' %(f'{layout[:2]}%%')
+            else:
+                layout_option = ' and '.join('layout not like %r' %(f'{i}室%%') for i in range(5))
+            special_options.append(layout_option)
 
-
-class FetchCommunityInfo(FetchInfo):
-    pass
+        return special_options

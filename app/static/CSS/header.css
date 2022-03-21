@@ -1,0 +1,183 @@
+.banner {
+    background-color: #f3f5fb;;
+    line-height: 38px;
+    font-size: 12px;
+}
+
+.banner .container {
+    width: 1150px;
+    margin: 0 auto;
+}
+
+.banner .container ul li{
+    display: inline-block;
+    margin-right: 21.5px;
+    position: relative;
+}
+.banner .container .channelList{
+    display: table-cell;
+    white-space: nowrap;
+}
+
+.banner .container ul li a{
+    color: #474b4e;
+    text-decoration: none;
+}
+.banner .container ul li a:hover{
+    color: black;
+    text-decoration: none;
+    font-weight:bolder;
+}
+
+.banner .container .banner-right{
+
+    display: table-cell;
+    width: 1000px;
+    text-align: right;
+    color: black;
+}
+
+.banner .container .banner-right .tel{
+    color: #a9abab;
+}
+
+
+.header{
+    width: 1150px;
+    line-height: 1;
+    padding: 30px 0 1px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header .menu{
+    width: 750px;
+    float: left;
+    overflow: hidden;
+}
+
+.header .menu .menuLeft{
+    float: left;
+    width: 35%;
+    display: inline-block;
+}
+
+
+.header .menu .label{
+    margin-top: 15px;
+    font-size: 16px;
+    float: left;
+
+}
+.header .menu .label .text{
+    margin-right: 15px;
+    line-height: 50px;
+    color: #101D37;
+}
+
+.header .menu .label .text:hover{
+    color: #23c993;
+}
+
+.header .menu .search{
+    overflow: hidden;
+    width: 750px;
+    height: 80px;
+}
+
+
+.header .menu .search input{
+    float: left;
+    display: block;
+    width: 500px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    padding-top: 0.375rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.header .menu .search .submit{
+    float: left;
+    border: none;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url(../img/search.png);
+}
+
+.header .menu .search .submit:hover{
+    cursor: pointer;
+}
+
+
+.header .menu .menuLeft a{
+    background-image: url(../img/logo_2.png);
+    width: 103px;
+    height: 32px;
+    display: inline-block;
+}
+
+.header .menu .menuLeft p{
+    color: #474b4e;
+    font-size: 18px;
+    font-family: "Calibri Light", serif;
+}
+
+
+
+
+.header  .top{
+    float: left;
+    width: 400px;
+    height: 100%;
+}
+
+.header  .top ul{
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+}
+
+.header  .top ul li{
+    display: inline-block;
+}
+.header  .top ul li span{
+    font-size: 15px;
+    float: left;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.header  .top ul li span:nth-child(1){
+    width: 40px;
+}
+.header  .top ul li span:nth-child(2){
+    width:150px;
+}
+
+.header  .top ul li span:nth-child(3){
+    font-weight: bold;
+    color: #F60;
+    width: 130px;
+}
+
+.header  .top ul li span img{
+    height: 100%;
+    width: 100%;
+}

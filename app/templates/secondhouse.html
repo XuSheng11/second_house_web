@@ -2,37 +2,333 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    {{ if  }}
+    <meta name="referrer" content="never">
     <title>{{ title }}</title>
 </head>
+<link href="../static/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/CSS/style3.css" />
+<script type="application/javascript" src="../static/JS/jquery.min.js"></script>
+
+
 <body>
-<h1>{{ title }}</h1>
-<br>
-<a href="{{ url_for('community_info',community_id=community_id) }}">{{ community }}</a>
-<br>
-<ul>
-    {% for key,value in features.items() %}
-        <li>
-            {{ key }} : {{ value }}
-        </li>
-    {% endfor %}
-</ul>
-<br>
-<ul>
-    {% for key,value in trade.items() %}
-        <li>
-            {{ key }} : {{ value }}
-        </li>
-    {% endfor %}
-</ul>
-<br>
-<ul>
-    {% for key,value in pictures.items() %}
-        <li>
-            <img src="{{ value }}"> <br>
-            <p> {{ key }} </p>
-        </li>
-    {% endfor %}
-</ul>
+<!--顶部菜单栏-->
+<div class="banner">
+    <div class="container">
+        <ul class="channelList">
+            <li>
+                <a href={{ url_for('index') }}>首页</a>
+            </li>
+            <li>
+                <a href="{{ url_for('homepage') }}" style="color: black;font-weight:bolder;">二手房</a>
+            </li>
+            <li>
+                <a href="{{ url_for('community_page') }}">小区</a>
+            </li>
+            <li>
+                <a href="">发布房源</a>
+            </li>
+        </ul>
+        <div class="banner-right">
+            <span>热线电话：13640xxxxxx</span>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="menu">
+        <div class="menuLeft">
+            <a href="{{ url_for('homepage') }}"></a>
+            <p>更懂生活更懂你</p>
+        </div>
+        <div class="label">
+            <a style="font-weight: bolder;color: #23c993" class="text" href="{{ url_for('homepage') }}">在售</a>
+            <a class="text" href="{{ url_for('community_page') }}">小区</a>
+        </div>
+        <div class="search">
+            <div class="input">
+                <form action="/search/" method="get">
+                    <input name="keyword" class="searchInput" type="text" placeholder="请输入关键字" >
+                    <input name="type" value="house" type="hidden">
+                    <button class="submit" type="submit"></button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sellDetailHeader">
+        <div class="title-wapper">
+            <div class="content">
+                <div class="title">
+                    <h1><a>{{ title }}</a></h1>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="intro">
+    <div class="text">
+        <a href="{{ url_for('index') }}">首页</a>
+        <span> > </span>
+        <a href="{{ url_for('homepage',district_cn=district) }}">{{ district }}</a>
+        <span> > </span>
+        <a href="{{ url_for('homepage',district_cn=district,region_cn=region) }}">{{ region }}</a>
+        <span> > </span>
+        <a href="{{ url_for('community_info',community_id=2111103316552) }}">{{ community }}</a>
+        <span> > </span>
+        <a>当前房源</a>
+    </div>
+</div>
+
+<div class="overview">
+    <div class="shell">
+    {% if pictures %}
+        <ul class="images">
+            {% for key,value in pictures.items() %}
+                <li class="img"><span>{{ key }}</span><img alt="" src="{{ value }}"/></li>
+            {% endfor %}
+        </ul>
+        <ul class="min-images">
+            {% for key,value in pictures.items() %}
+                <li class="min" style="background-image: url('{{ value }}')"></li>
+            {% endfor %}
+        </ul>
+        <div class="button">
+            <div class="button-left"><</div>
+            <div class="button-right">></div>
+        </div>
+    {% else %}
+        <ul class="images">
+            <li class="img"><img alt="" src="../static/img/blank.png"/></li>
+        </ul>
+    {% endif %}
+
+    </div>
+    <div class="content">
+        <div class="price_content">
+            <div class="total_price">
+                {% if total_price %}
+                    <span>{{ total_price }}万</span>
+                    <a class="avg_price">{{ unit_price }}元平方米</a>
+                {% else %}
+                    <span>暂无数据</span>
+                    <a class="avg_price">暂无数据</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="houseinfo">
+            <div class="room">
+                <div class="mainInfo">{{ layout }}</div>
+                <div class="subInfo">{{ floor_height }}/共{{ floor_num }}层</div>
+            </div>
+            <div class="type">
+                <div class="mainInfo">{{ direction }}</div>
+                <div class="subInfo">{{ type }}/{{ renovation }}</div>
+            </div>
+            <div>
+                <div class="mainInfo">{{ size }}平米</div>
+                {% if year %}
+                    <div class="subInfo">{{ year }}年建</div>
+                {% else %}
+                    <div class="subInfo">未知年建</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="aroundInfo">
+            <div class="communityName">
+                <span class="label">所属小区</span>
+                <a class="info" href="{{ url_for('community_info',community_id=community_id) }}">{{ community }}</a>
+            </div>
+            <div class="areaName">
+                <span class="label">所属区域</span>
+                <a class="info" href="{{ url_for('homepage',district_cn=district) }}">{{ district }}</a>
+                <a class="info">|</a>
+                <a class="info" href="{{ url_for('homepage',district_cn=district,region_cn=region) }}">{{ region }}</a>
+                {% if subway %}
+                    <a class="info" href="{{ url_for('homepage',subway_id=subway['subway_id'],station_id=subway['station_id']) }}">{{ subway['subway_dis'] }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div style="width: 750px;overflow: hidden; float: left">
+        <div class="info">
+            <div style="margin-bottom: 10px">
+                <h2>
+                    <a class="title">基本信息</a>
+                </h2>
+            </div>
+            <div class="introContent">
+                <div class="base">
+                    <div class="name">基本属性</div>
+                    <div class="content">
+                        <ul>
+                            {% for key,value in base.items() %}
+                                <li>
+                                    <span class="label">{{ key }}</span>
+                                    <a>{{ value }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="transaction">
+                    <div class="name">交易属性</div>
+                    <div class="content">
+                        <ul>
+                            {% for key,value in trade.items() %}
+                                <li>
+                                    <span class="label">{{ key }}</span>
+                                    <a>{{ value }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% if features %}
+        <div class="info" style="margin-top: 70px;margin-bottom: 100px">
+            <div style="margin-bottom: 10px">
+                <h2>
+                    <a class="title">房源特色</a>
+                </h2>
+            </div>
+
+            <div class="introContent">
+                {% for key,value in features.items() %}
+                    <div class="baseAttribute">
+                        <div class="name">{{ key }}</div>
+                        <a>{{ value }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+    {% endif %}
+    <!--户型分间信息-->
+
+    {% if layout_detail %}
+        <div class="info" style="margin-top: 50px;margin-bottom: 100px">
+            <div style="margin-bottom: 10px">
+                <h2>
+                    <a class="title">户型分间</a>
+                </h2>
+            </div>
+            <div class="room_content">
+                <div class="imgdiv">
+                    <img alt="" src="{{ pictures['户型图'] }}">
+                </div>
+                <div class="des">
+                    {% for layout in layout_detail %}
+                        <ul>
+                            <li>{{ layout['name'] }}</li>
+                            <li>{{ layout['size'] }}</li>
+                            <li>{{ layout['direction'] }}</li>
+                            <li>{{ layout['window'] }}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+
+
+</div>
+<div class="house">
+    <div class="hot_house">
+            <div class="label">
+                <h1>小区房源价格 TOP4</h1>
+            </div>
+
+            <div class="recommend-list">
+                {% for house in top %}
+                    <div class="item">
+                    <div class="item_image">
+                        {% if house['cover'] %}
+                            <img alt="" src="{{ house['cover'] }}">
+                        {% else %}
+                            <img alt="" src="../static/img/blank.png">
+                        {% endif %}
+                    </div>
+                    <div class="item_info">
+                        <!--标题 -->
+                        <div class="item_info_title">
+                            <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
+                        </div>
+
+                        <div class="item_info_room">
+                            <span>{{ house['layout'] }}</span>
+                            <span>{{ house['size'] }}平方米</span>
+                        </div>
+                        <!--房子价格 -->
+                        <div class="item_info_price">
+                            {% if house['total_price'] %}
+                                <span class="price">{{ house['total_price'] }}万&emsp;</span>
+                                <span>{{ house['unit_price'] }}元/㎡</span>
+                            {% else %}
+                                <span class="price">暂无数据</span>
+                                <span>暂无数据</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                </div>
+            </div>
+    <div class="similar_house" style="margin-top: 100px">
+        <div class="label">
+            <h1>小区房源推荐</h1>
+        </div>
+
+        <div class="recommend-list">
+            {% for house in recommend %}
+                <div class="item">
+                <div class="item_image">
+                        {% if house['cover'] %}
+                            <img alt="" src="{{ house['cover'] }}">
+                        {% else %}
+                            <img alt="" src="../static/img/blank.png">
+                        {% endif %}
+                </div>
+                <div class="item_info">
+                    <!--标题 -->
+                    <div class="item_info_title">
+                        <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
+                    </div>
+
+                    <div class="item_info_room">
+                        <span>{{ house['layout'] }}</span>
+                        <span>{{ house['size'] }}平方米</span>
+                    </div>
+                    <!--房子价格 -->
+                    <div class="item_info_price">
+                        {% if house['total_price'] %}
+                            <span class="price">{{ house['total_price'] }}万&emsp;</span>
+                            <span>{{ house['unit_price'] }}元/㎡</span>
+                        {% else %}
+                            <span class="price">暂无数据</span>
+                            <span>暂无数据</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            </div>
+        </div>
+</div>
+    </div>
+<div class="last"></div>
 </body>
+<script type="application/javascript" src="../static/JS/js.js"></script>
 </html>
