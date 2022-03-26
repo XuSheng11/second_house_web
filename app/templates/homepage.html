@@ -58,17 +58,17 @@
             <li>
                 <span class="top_img"><img alt="" src="../static/img/top1.png"></span>
                 <span><a href="{{ url_for('house_info',house_id=top[0]['house_id']) }}">{{ top[0]['title'] }}</a></span>
-                <span>{{ top[0]['total_price'] }}万</span>
+                <span>{{ top[0]['unit_price'] }}元/平方米</span>
             </li>
             <li>
                 <span class="top_img"><img alt="" src="../static/img/top2.png"></span>
                 <span><a href="{{ url_for('house_info',house_id=top[1]['house_id']) }}">{{ top[1]['title'] }}</a></span>
-                <span>{{ top[1]['total_price'] }}万</span>
+                <span>{{ top[1]['unit_price'] }}元/平方米</span>
             </li>
             <li>
                 <span class="top_img"><img alt="" src="../static/img/top3.png"></span>
                 <span><a href="{{ url_for('house_info',house_id=top[2]['house_id']) }}">{{ top[2]['title'] }}</a></span>
-                <span>{{ top[2]['total_price'] }}万</span>
+                <span>{{ top[2]['unit_price'] }}元/平方米</span>
             </li>
 
         </ul>
@@ -696,16 +696,6 @@
                 <li class="li_selected">
                     <h3><a>全部</a></h3>
                 </li>
-                <li >
-                    <h3><a>房屋总价</a></h3>
-                </li>
-                <li >
-                    <h3><a>房屋面积</a></h3>
-                </li>
-                <li >
-                    <h3><a>挂牌时间</a></h3>
-                </li>
-
             </ul>
         </div>
 

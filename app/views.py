@@ -19,11 +19,11 @@ def get_ico():
 def homepage():
     top = []
     for t in select(h for h in GuangZhouSecondHouseCommonInfo).order_by(
-            desc(GuangZhouSecondHouseCommonInfo.total_price)).limit(3):
+            desc(GuangZhouSecondHouseCommonInfo.unit_price)).limit(3):
         top.append({
             'house_id': t.house_id,
             'title': t.title,
-            'total_price': t.total_price
+            'unit_price': t.unit_price
         })
     options = dict(request.args)
 

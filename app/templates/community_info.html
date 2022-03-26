@@ -144,13 +144,17 @@
                 {% else %}
                     <img alt="" src="../static/img/blank.png">
                 {% endif %}
-              <span class="goodSellItemPrice">¥{{ house['total_price'] }}万</span>
+                {% if house['total_price'] %}
+                    <span class="goodSellItemPrice">¥{{ house['total_price'] }}万</span>
+                {% else %}
+                    <span class="goodSellItemPrice">暂无价格信息</span>
+                {% endif %}
             </a>
             <div class="goodSellItemTitle">
                 <a href="{{ url_for('house_info',house_id=house['house_id']) }}">{{ house['title'] }}</a>
             </div>
           <div class="goodSellItemDesc">
-            {{ house['size'] }}/{{ house['layout'] }}
+            {{ house['size'] }}㎡/{{ house['layout'] }}
           </div>
         </li>
         {% endfor %}
