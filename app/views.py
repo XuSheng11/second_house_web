@@ -38,7 +38,7 @@ def homepage():
         results = select(h for h in GuangZhouSecondHouseCommonInfo).where(raw_sql(sql_options)).page(pagenum=page,
                                                                                                      pagesize=20)
     else:
-        nums = 92010
+        nums = 91895
         results = select(h for h in GuangZhouSecondHouseCommonInfo).page(pagenum=page, pagesize=20)
 
     options['label'] = 'district'
