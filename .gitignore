@@ -134,5 +134,5 @@ dmypy.json
 *test*
 
 # pictures
-*.jpg
-*.png
+#*.jpg
+#*.png
