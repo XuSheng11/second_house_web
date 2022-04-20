@@ -142,7 +142,7 @@
                                             {% if district != options['district_cn'] %}
                                                 <a title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size']) }}">{{ district }}</a>
                                             {% else %}
-                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size']) }}">
+                                                <a class="region_selected" title="广州{{ district }}在售二手房" href="{{ url_for('homepage',district_cn=district,size=options['size']) }}">{{ district }}</a>
                                             {% endif %}
                                         {% elif options['layout'] %}
                                             {% if district != options['district_cn'] %}
