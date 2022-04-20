@@ -19,7 +19,7 @@ class GenerateOptions():
 
     def generate(self):
         sql_options = self.init_option(options=self.options)
-        print(sql_options)
+        # print(sql_options)
         return sql_options
 
 

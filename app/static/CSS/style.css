@@ -76,6 +76,7 @@ body {
     height: 69px;
     width: 540px;
     background-repeat: no-repeat;
+    background-size: contain;
     background-image: -webkit-image-set(url(../img/title1.png) 1x, url(../img/title1.png) 2x);
     margin: 120px auto 0 auto;
 }
@@ -106,11 +107,11 @@ body {
     margin: 20px 10px;
 }
 .wrapper .f1 .name{
-    background-image: url(../img/sprite.png);
-    background-image: -webkit-image-set(url(../img/sprite.png) 1x, url(../img/sprite.png) 2x);
-    background-position: -19px -94px;
-    width: 248px;
+    background-image: url(../img/name.png);
+    background-image: -webkit-image-set(url(../img/name.png) 1x, url(../img/name.png) 2x);
+    width: 165px;
     height: 30px;
+    background-size: contain;
 }
 
 .wrapper .f1 p{

@@ -55,7 +55,7 @@ def homepage():
         for station in select(s for s in GuangZhouSubwayStation if s.subway_id == subway):
             options['stations_name'].append(station.name)
             options['stations_id'].append(station.id)
-        print(options)
+        # print(options)
     subway = []
     for s in select(s for s in GuangZhouSubway):
         subway.append({
@@ -77,7 +77,7 @@ def homepage():
             'district_cn': house.district_cn,
             'size': house.size
         })
-    print(options)
+    # print(options)
     return render_template('homepage.html', top=top, nums=nums, house_list=house_list, options=options, subway=subway)
 
 
@@ -143,7 +143,7 @@ def house_info(house_id):
         'recommend': recommend,
         'top': top
     }
-    print(info)
+    # print(info)
     return render_template('secondhouse.html', **info)
 
 
@@ -156,7 +156,8 @@ def community_page():
             'name': t.name,
             'unit_price': t.unit_price
         })
-
+    print('小区均价top3:')
+    print(top)
     options = dict(request.args)
     page = 1
     if options.get('page'):
@@ -195,7 +196,7 @@ def community_page():
             'year': community.features['建筑年代'],
             'cover': cover
         })
-    print(options)
+    # print(options)
     return render_template('community.html', top=top, community_list=community_list, nums=nums, options=options)
 
 
@@ -234,7 +235,7 @@ def search():
         page = int(options.pop('page'))
     if options['type'] == 'house':
         sql_options = 'title like %r or community like %r' % (f'%%{options["keyword"]}%%', f'%%{options["keyword"]}%%')
-        print(sql_options)
+        # print(sql_options)
         nums = select(h for h in GuangZhouSecondHouseCommonInfo).where(raw_sql(sql_options)).count()
         results = select(h for h in GuangZhouSecondHouseCommonInfo).where(raw_sql(sql_options)).page(pagenum=page,
                                                                                                      pagesize=20)
@@ -275,4 +276,6 @@ def search():
                 'year': community.features['建筑年代'],
                 'cover': cover
             })
+        print('关键词%r小区搜索结果：' %(options['keyword']))
+        print(community_list)
         return render_template('search.html', community_list=community_list, options=options, nums=nums)
